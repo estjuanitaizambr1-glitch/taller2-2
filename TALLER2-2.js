@@ -8,3 +8,5 @@ let points = [
   { x: 350, y: 50 },
   { x: 450, y: 300 }
 ];
+// Punto que se está arrastrando
+let draggingPoint = null;
