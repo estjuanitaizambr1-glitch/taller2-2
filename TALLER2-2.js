@@ -42,3 +42,32 @@ function draw() {
     ctx.fill();
   });
 }
+// Evento mouse down
+canvas.addEventListener("mousedown", e => {
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  points.forEach(p => {
+    if (Math.hypot(p.x - x, p.y - y) < 10) {
+      draggingPoint = p;
+    }
+  });
+});
+
+// Evento mouse move
+canvas.addEventListener("mousemove", e => {
+  if (draggingPoint) {
+    const rect = canvas.getBoundingClientRect();
+    draggingPoint.x = e.clientX - rect.left;
+    draggingPoint.y = e.clientY - rect.top;
+    draw();
+  }
+});
+
+// Evento mouse up
+canvas.addEventListener("mouseup", () => draggingPoint = null);
+canvas.addEventListener("mouseleave", () => draggingPoint = null);
+
+// Dibujar al cargar
+draw();
